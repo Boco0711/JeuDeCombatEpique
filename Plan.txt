@@ -1,0 +1,86 @@
+Création du personnage du Joueur 1
+
+Choix de la classe de personnage entre trois choix : ( Guerrier, Rodeur ou Mage )
+
+Niveau du personnage ( mini 1 maxi 100 )
+Vitalité ( automatique * 5 le niveau )
+
+Force du personnage ( Mini 0, Maxi niveau du personnage )
+Agilité du personnage ( Mini 0, Maxi niveau du personnage - force du personnage )
+Intelligence du personnage ( Mini 0, Maxi niveau du personnage - ( force du personnage + agilité du personnage )
+
+Entrée du personnage du Joueur 1 avec récapitulatif Classe, niveau, vitalité, force, agilité, intelligence.
+
+------------------------------------------------------------------------------------------------------------------
+
+Même chose pour Joueur 2
+
+------------------------------------------------------------------------------------------------------------------
+
+Entrée en combat :
+
+Joueur 1, + rappel de la vitalité, choisi une compétence a utiliser parmis les deux disponibles
+
+Texte de la compétence et montant des dommage infligé
+Récapitulatif des point de vie perdu par joueur 2
+Récapitulatif des point de vie perdu par joueur 1 si il y en a
+
+
+Joueur 2, + rappel de la vitalité, choisi une compétence a utiliser parmis les deux disponibles
+
+Texte de la compétence et montant des dommage infligé
+Récapitulatif des point de vie perdu par joueur 1
+Récapitulatif des point de vie perdu par joueur 2 si il y en a
+
+La partie s'arrete si un des deux joueur n'a plus de points de vie.
+
+------------------------------------------------------------------------------------------------------------------
+
+Les entrées en jeux selon les classes :
+
+Guerrier :
+Woarg je suis le Guerrier Joueur * niveau * je possède * de vitalité, * de force, * d'agilité et * d'intelligence
+
+Rodeur :
+Shhhh je suis le Rôdeur Joueur * niveau * je possède * de vitalité, * de force, * d'agilité et * d'intelligence
+
+Mage :
+Abracadabra je suis le Mage Joueur * niveau * je possède * de vitalité, * de force, * d'agilité et * d'intelligence
+
+-------------------------------------------------------------------------------------------------------------------
+
+Les coups selons les classes ;
+
+Guerrier :
+
+Attaque basique :
+Nom :       Coup d'Épée
+Effets :    Dégat sur adversaire = Force*1
+
+Attaque spéciale :
+Nom :       Coup de Rage
+Effets :    Dégats sur adversaire = Force*2
+            Dégats sur lui-même = Force/2
+
+
+Rôdeur :
+
+Attaque basique :
+Nom :       Tir à l'Arc
+Effets :    Dégats sur adversaire = Agilité*1
+
+Attaque spéciale :
+Nom :       Concentration
+Effets :    Agilité = Agilité + Niveau/2
+
+
+Mage :
+
+Attaque basique :
+Nom :       Boule de Feu
+Effets :    Dégats sur adversaire = Intelligence*1
+
+Attaque spéciale :
+Nom :       Soin
+Effets :    Vitalité = Vitalité + Intelligence*2
+            Vitalité ne peut pas être supérieur a Niveau*5
