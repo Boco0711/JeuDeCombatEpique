@@ -4,30 +4,8 @@ import java.util.Scanner;
 
 
 public class Character {
-    public String getWarcraft() {
-        return warcraft;
-    }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public int getVitality() {
-        return vitality;
-    }
-
-    public int getStrenght() {
-        return strenght;
-    }
-
-    public int getAgility() {
-        return agility;
-    }
-
-    public int getIntelligence() {
-        return intelligence;
-    }
-
+    private String name;
     private String warcraft;
     private int level;
     private int vitality;
@@ -37,7 +15,18 @@ public class Character {
 
     Scanner sc = new Scanner(System.in);
 
+    public Character(String joueur,String warcraft, int level, int strenght, int agility, int intelligence) {
+        this.name = joueur;
+        this.warcraft = warcraft;
+        this.level =  level;
+        this.vitality = level * 5;
+        this.strenght = strenght;
+        this.agility = agility;
+        this.intelligence = intelligence;
+    }
+
     public Character(String joueur) {
+        this.name = joueur;
         System.out.println("Création du personnage du " + joueur);
         this.warcraft = askWarcraft();
         this.level = askLevel();
@@ -113,5 +102,29 @@ public class Character {
             System.out.println("Shhh je suis le Rodeur " + joueur + " niveau " + this.level + " je possède " + this.vitality + " de vitalité, " + this.strenght + " de force, " + this.agility + " d'agilité et " + this.intelligence + " d'intelligence !");
         else if (this.warcraft.equals("Mage"))
             System.out.println("Abracadabra je suis le Mage " + joueur + " niveau " + this.level + " je possède " + this.vitality + " de vitalité, " + this.strenght + " de force, " + this.agility + " d'agilité et " + this.intelligence + " d'intelligence !");
+    }
+
+    public String getWarcraft() {
+        return warcraft;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getVitality() {
+        return vitality;
+    }
+
+    public int getStrenght() {
+        return strenght;
+    }
+
+    public int getAgility() {
+        return agility;
+    }
+
+    public int getIntelligence() {
+        return intelligence;
     }
 }
