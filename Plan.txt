@@ -84,3 +84,13 @@ Attaque spéciale :
 Nom :       Soin
 Effets :    Vitalité = Vitalité + Intelligence*2
             Vitalité ne peut pas être supérieur a Niveau*5
+
+--------------------------------------------------------------------------------------------------------------------
+
+Création du personnage du Joueur 1
+Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rodeur, 3 : Mage)
+Niveau du personnage ?
+Force du personnage ?
+Agilité du personnage ?
+Intelligence du personnage ?
+Woarg je suis le Guerrier Joueur 1 niveau 10 je possède 50 de vitalité, 10 de force, 0 d'agilité et 0 d'intelligence !
