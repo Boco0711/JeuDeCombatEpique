@@ -1,5 +1,6 @@
 package com.ocr.sylvain;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -15,10 +16,10 @@ public class Character {
 
     Scanner sc = new Scanner(System.in);
 
-    public Character(String joueur,String warcraft, int level, int strenght, int agility, int intelligence) {
+    public Character(String joueur, String warcraft, int level, int strenght, int agility, int intelligence) {
         this.name = joueur;
         this.warcraft = warcraft;
-        this.level =  level;
+        this.level = level;
         this.vitality = level * 5;
         this.strenght = strenght;
         this.agility = agility;
@@ -39,10 +40,22 @@ public class Character {
 
     public String askWarcraft() {
         System.out.println("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rodeur; 3 : Mage)");
-        int choix = sc.nextInt();
-        while (choix < 1 || choix > 3) {
-            System.out.println("Vous n'avez pas choisi de classe parmi les choix proposés");
-            choix = sc.nextInt();
+        boolean responseIsGood = false;
+        int choix = 0;
+        while (!responseIsGood || choix < 1 || choix > 3) {
+            try {
+                choix = sc.nextInt();
+                responseIsGood = true;
+                if (choix < 1 || choix > 3) {
+                    System.out.println("Vous n'avez pas choisi de classe parmi les choix proposés");
+                    System.out.println("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rodeur; 3 : Mage)");
+                }
+            } catch (InputMismatchException e) {
+                sc.next();
+                System.out.println("Vous n'avez pas choisi de classe parmi les choix proposés");
+                System.out.println("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rodeur; 3 : Mage)");
+                responseIsGood = false;
+            }
         }
         switch (choix) {
             case 1:
@@ -104,6 +117,10 @@ public class Character {
             System.out.println("Abracadabra je suis le Mage " + joueur + " niveau " + this.level + " je possède " + this.vitality + " de vitalité, " + this.strenght + " de force, " + this.agility + " d'agilité et " + this.intelligence + " d'intelligence !");
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String getWarcraft() {
         return warcraft;
     }
@@ -126,5 +143,20 @@ public class Character {
 
     public int getIntelligence() {
         return intelligence;
+    }
+
+
+    public void receiveDamage(int damage) {
+        this.vitality = this.vitality - damage;
+    }
+
+    public void addAgility(int i) {
+        this.agility = agility + i;
+    }
+
+    public void addHealth(int i) {
+        this.vitality = this.vitality + i;
+        if (this.vitality > this.level * 5)
+            this.vitality = this.level * 5;
     }
 }
