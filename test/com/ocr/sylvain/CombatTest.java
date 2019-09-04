@@ -32,7 +32,7 @@ class CombatTest {
 
 
     @Test
-    public void Given_BasicAttack_When_CombatIsRunWarriorAttack_Then_DisplaySentence() {
+    public void Given_WarriorBasicAttack_When_CombatIsRun_Then_DisplaySentence() {
         System.setIn(new ByteArrayInputStream("1\n".getBytes()));
         Combat combat = new Combat(joueur1, joueur2);
         combat.startCombat(joueur1, joueur2);
@@ -41,7 +41,7 @@ class CombatTest {
     }
 
     @Test
-    public void Given_SpécialAttack_When_CombatIsRunWarriorAttack_Then_DisplaySentence() {
+    public void Given_WarriorSpecialAttack_When_CombatIsRun_Then_DisplaySentence() {
         System.setIn(new ByteArrayInputStream("2\n".getBytes()));
         Combat combat = new Combat(joueur1, joueur2);
         combat.startCombat(joueur1, joueur2);
@@ -50,7 +50,7 @@ class CombatTest {
     }
 
     @Test
-    public void Given_BasicAttack_When_CombatIsRunRodeurAttack_Then_DisplaySentence() {
+    public void Given_RodeurBasicAttack_When_CombatIsRun_Then_DisplaySentence() {
         System.setIn(new ByteArrayInputStream("1\n".getBytes()));
         Combat combat = new Combat(joueur2, joueur3);
         combat.startCombat(joueur2, joueur3);
@@ -59,7 +59,7 @@ class CombatTest {
     }
 
     @Test
-    public void Given_SpécialAttack_When_CombatIsRunRodeurAttack_Then_DisplaySentence() {
+    public void Given_RodeurSpecialAttack_When_CombatIsRun_Then_DisplaySentence() {
         System.setIn(new ByteArrayInputStream("2\n".getBytes()));
         Combat combat = new Combat(joueur2, joueur3);
         combat.startCombat(joueur2, joueur3);
@@ -68,7 +68,7 @@ class CombatTest {
     }
 
     @Test
-    public void Given_BasicAttack_When_CombatIsRunMageAttack_Then_DisplaySentence() {
+    public void Given_MageBasicAttack_When_CombatIsRun_Then_DisplaySentence() {
         System.setIn(new ByteArrayInputStream("1\n".getBytes()));
         Combat combat = new Combat(joueur3, joueur2);
         combat.startCombat(joueur3, joueur2);
@@ -77,14 +77,23 @@ class CombatTest {
     }
 
     @Test
-    public void Given_SpécialAttack_When_CombatIsRunMageAttack_Then_DisplaySentence() {
+    public void Given_MageSpecialAttack_When_CombatIsRun_Then_DisplaySentence() {
         System.setIn(new ByteArrayInputStream("2\n".getBytes()));
+        joueur3.receiveDamage(300);
         Combat combat = new Combat(joueur3, joueur2);
         combat.startCombat(joueur3, joueur2);
         String[] output = outContent.toString().replace("\r\n", "\n").split("\n");
         assertEquals("Joueur 3 utilise Soin et gagne 200 en vitalité", output[1]);
     }
 
+    @Test
+    public void Given_MageSpecialAttackAtFullHP_When_CombatIsRun_Then_DisplaySentence() {
+        System.setIn(new ByteArrayInputStream("2\n".getBytes()));
+        Combat combat = new Combat(joueur3, joueur2);
+        combat.startCombat(joueur3, joueur2);
+        String[] output = outContent.toString().replace("\r\n", "\n").split("\n");
+        assertEquals("Joueur 3 utilise Soin et gagne 0 en vitalité", output[1]);
+    }
 
     @Test
     public void Given_BadValue_When_CombatIsRun_Then_DisplayErrorSentence() {
@@ -95,4 +104,7 @@ class CombatTest {
         assertEquals("Vous n'avez pas choisi une action valide", output[1]);
         assertEquals("Joueur 1 utilise Coup de Rage et inflige 200 dommages", output[3]);
     }
+
+
+
 }
