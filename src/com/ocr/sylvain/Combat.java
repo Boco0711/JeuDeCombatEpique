@@ -1,5 +1,6 @@
 package com.ocr.sylvain;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Combat {
@@ -34,17 +35,21 @@ public class Combat {
      */
     public void fight(Character attacker, Character defender) {
         int choiceOfAttack = 0;
-        while (choiceOfAttack < 1 || choiceOfAttack > 2) {
+        boolean responseIsGood = false;
+        while (!responseIsGood || choiceOfAttack < 1 || choiceOfAttack > 2) {
             System.out.println(attacker.getName() + " (" + attacker.getVitality() + " vitalité) veuillez choisir votre action (1 : " + getBasicAttack(attacker.getWarcraft()) + ", 2 : " + getSpecialAttack(attacker.getWarcraft()) + ")");
-            choiceOfAttack = sc.nextInt();
+            try {
+                choiceOfAttack = sc.nextInt();
+                responseIsGood = true;
+            } catch (InputMismatchException e) {
+                sc.next();
+                System.out.println("Vous n'avez pas choisi une action valide");
+            }
             if (choiceOfAttack == 1)
                 basicActionEffect(attacker, defender);
             else if (choiceOfAttack == 2)
                 specialActionEffect(attacker, defender);
-            else
-                System.out.println("Vous n'avez pas choisi une action valide");
         }
-
     }
 
     /**
@@ -132,6 +137,4 @@ public class Combat {
                 break;
         }
     }
-
-
 }
