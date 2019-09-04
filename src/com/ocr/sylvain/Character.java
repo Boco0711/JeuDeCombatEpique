@@ -70,40 +70,87 @@ public class Character {
 
     private int askLevel() {
         System.out.println("Niveau du personnage ?");
-        int level = sc.nextInt();
-        while (level < 1 || level > 100) {
-            System.out.println("Le niveau doit être compris entre 1 et 100 inclus");
-            level = sc.nextInt();
+        int level = 0;
+        boolean responseIsGood = false;
+        while (!responseIsGood || level < 1 || level > 100) {
+            try {
+                level = sc.nextInt();
+                responseIsGood = true;
+                if (level < 1 || level > 100) {
+                    System.out.println("Le niveau doit être compris entre 1 et 100 inclus");
+                    level = sc.nextInt();
+                }
+            } catch (InputMismatchException e) {
+                sc.next();
+                System.out.println("Le niveau doit être compris entre 1 et 100 inclus");
+                System.out.println("Niveau du personnage ?");
+            }
         }
         return level;
     }
 
     private int askStrenght(int level) {
         System.out.println("Force du personnage ?");
-        int strenght = sc.nextInt();
-        while (strenght < 0 || strenght > level) {
-            System.out.println("La valeur des vos statistiques Force, Agilité et Intelligence cumulé ne peut excéder le niveau du personnage");
-            strenght = sc.nextInt();
+        int strenght = -1;
+        boolean responseIsGood = false;
+        while (!responseIsGood || strenght < 0 || strenght > level) {
+            try {
+                strenght = sc.nextInt();
+                responseIsGood = true;
+                if (strenght < 0 || strenght > level) {
+                    System.out.println("La valeur de la Force doit être compris entre 0 et " + level);
+                    System.out.println("Force du personnage ? (0 - " + level + ")");
+                    strenght = sc.nextInt();
+                }
+            } catch (InputMismatchException e) {
+                sc.next();
+                System.out.println("La valeur de la Force doit être compris entre 0 et " + level);
+                System.out.println("Force du personnage ? (0 - " + level + ")");
+            }
         }
         return strenght;
     }
 
     private int askAgility(int level, int strenght) {
         System.out.println("Agilité du personnage ?");
-        int agility = sc.nextInt();
-        while (agility < 0 || agility > (level - strenght)) {
-            System.out.println("La valeur des vos statistiques Force, Agilité et Intelligence cumulé ne peut excéder le niveau du personnage");
-            agility = sc.nextInt();
+        int agility = -1;
+        boolean responseIsGood = false;
+        while (!responseIsGood || agility < 0 || agility > (level - strenght)) {
+            try {
+                agility = sc.nextInt();
+                responseIsGood = true;
+                if (agility < 0 || agility > (level - strenght)) {
+                    System.out.println("La valeur de l'Agilité doit être comprise entre 0 et " + (level-strenght));
+                    System.out.println("Agilité du personnage ? (0 - " + (level-strenght) + ")");
+                    agility = sc.nextInt();
+                }
+            } catch (InputMismatchException e) {
+                sc.next();
+                System.out.println("La valeur de l'Agilité doit être comprise entre 0 et " + (level-strenght));
+                System.out.println("Agilité du personnage ? (0 - " + (level-strenght) + ")");
+            }
         }
         return agility;
     }
 
     private int askIntelligence(int level, int strenght, int agility) {
         System.out.println("Intelligence du personnage ?");
-        int intelligence = sc.nextInt();
-        while (intelligence < 0 || intelligence > (level - (strenght + agility))) {
-            System.out.println("La valeur des vos statistiques Force, Agilité et Intelligence cumulé ne peut excéder le niveau du personnage");
-            intelligence = sc.nextInt();
+        int intelligence = -1;
+        boolean responseIsGood = false;
+        while (!responseIsGood || intelligence < 0 || intelligence > (level - (strenght + agility))) {
+            try {
+                intelligence = sc.nextInt();
+                responseIsGood = true;
+                if (agility < 0 || agility > (level - strenght)) {
+                    System.out.println("La valeur de l'Intelligence doit être comprise entre 0 et " + (level-(strenght+intelligence)));
+                    System.out.println("Intelligence du personnage ? (0 - " + (level-(strenght+intelligence)) + ")");
+                    level = sc.nextInt();
+                }
+            } catch (InputMismatchException e) {
+                sc.next();
+                System.out.println("La valeur de l'Intelligence doit être comprise entre 0 et " + (level-(strenght+intelligence)));
+                System.out.println("Intelligence du personnage ? (0 - " + (level-(strenght+intelligence)) + ")");
+            }
         }
         return intelligence;
     }
