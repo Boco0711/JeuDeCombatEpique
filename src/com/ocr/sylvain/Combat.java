@@ -41,6 +41,9 @@ public class Combat {
             try {
                 choiceOfAttack = sc.nextInt();
                 responseIsGood = true;
+                if (choiceOfAttack < 1 || choiceOfAttack > 2) {
+                    System.out.println("Vous n'avez pas choisi une action valide");
+                }
             } catch (InputMismatchException e) {
                 sc.next();
                 System.out.println("Vous n'avez pas choisi une action valide");
