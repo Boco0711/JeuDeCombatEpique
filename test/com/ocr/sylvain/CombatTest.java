@@ -38,13 +38,13 @@ class CombatTest {
         combat.startCombat(joueur1, joueur2);
         String[] output = outContent.toString().replace("\r\n", "\n").split("\n");
         assertEquals("Joueur 1 utilise Coup d'Épée et inflige 100 dommages", output[1]);
-        assertEquals("Joueur 2 utilise Coup d'Épée et inflige 100 dommages", output[]);
-        assertEquals("Joueur 1 utilise Coup d'Épée et inflige 100 dommages", output[1]);
-        assertEquals("Joueur 2 utilise Coup d'Épée et inflige 100 dommages", output[1]);
-        assertEquals("Joueur 1 utilise Coup d'Épée et inflige 100 dommages", output[1]);
-        assertEquals("Joueur 2 utilise Coup d'Épée et inflige 100 dommages", output[1]);
-        assertEquals("Joueur 1 utilise Coup d'Épée et inflige 100 dommages", output[1]);
-        assertEquals("Joueur 2 utilise Coup d'Épée et inflige 100 dommages", output[1]);
+        assertEquals("Joueur 2 utilise Tir à l'Arc et inflige 100 dommages", output[3]);
+        assertEquals("Joueur 1 utilise Coup d'Épée et inflige 100 dommages", output[5]);
+        assertEquals("Joueur 2 utilise Tir à l'Arc et inflige 100 dommages", output[7]);
+        assertEquals("Joueur 1 utilise Coup d'Épée et inflige 100 dommages", output[9]);
+        assertEquals("Joueur 2 utilise Tir à l'Arc et inflige 100 dommages", output[11]);
+        assertEquals("Joueur 1 utilise Coup d'Épée et inflige 100 dommages", output[13]);
+        assertEquals("Joueur 2 utilise Tir à l'Arc et inflige 100 dommages", output[15]);
     }
 
     @Test
