@@ -126,7 +126,7 @@ class CombatTest {
         Combat combat = new Combat(joueur3, joueur2);
         combat.fight(joueur3, joueur2);
         String[] output = outContent.toString().replace("\r\n", "\n").split("\n");
-        assertEquals("Joueur 3 utilise Soin et gagne 200 en vitalité", output[1]);
+        assertEquals("Joueur 3 utilise Soin et gagne 200 en vitalité", output[2]);
     }
 
     @Test
