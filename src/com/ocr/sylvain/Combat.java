@@ -9,6 +9,9 @@ public class Combat {
 
     Scanner sc = new Scanner(System.in);
 
+
+    private boolean joueur1IsWinner = false;
+
     public Combat(Character joueur1, Character joueur2) {
         this.joueur1 = joueur1;
         this.joueur2 = joueur2;
@@ -25,7 +28,11 @@ public class Combat {
             if (joueur1.getVitality() > 0 && joueur2.getVitality() > 0)
             fight(joueur2, joueur1);
         }
-
+        boolean player1Win = getJoueur1IsWinner();
+        if (player1Win == false)
+            System.out.println(joueur1.getName() + " a perdu !");
+        else if (player1Win == true)
+            System.out.println(joueur2.getName() + " a perdu !");
     }
 
     /**
@@ -60,7 +67,7 @@ public class Combat {
      * @param warcraft player's warcraft
      * @return the name of the basic attack
      */
-        String getBasicAttack(String warcraft) {
+    String getBasicAttack(String warcraft) {
         switch (warcraft) {
             case "Guerrier":
                 return ("Coup d'Épée");
@@ -109,8 +116,11 @@ public class Combat {
                 defender.receiveDamage(attacker.getIntelligence());
                 break;
         }
-        if (defender.getVitality() == 0)
+        if (defender.getVitality() == 0) {
+            if (defender.getName().equals("Joueur 2"))
+                setJoueur1IsWinner(true);
             System.out.println(defender.getName() + " est mort");
+        }
     }
 
     /**
