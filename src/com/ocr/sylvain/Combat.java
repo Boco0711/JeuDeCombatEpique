@@ -85,7 +85,7 @@ public class Combat {
     /**
      * Return the name of Special attack depending on the player's warcraft
      *
-     * @param warcraft
+     * @param warcraft player's warcraft
      * @return the name of special attack
      */
     String getSpecialAttack(String warcraft) {
