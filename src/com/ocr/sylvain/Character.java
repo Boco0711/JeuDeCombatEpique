@@ -16,6 +16,9 @@ public class Character {
 
     Scanner sc = new Scanner(System.in);
 
+    public Character() {
+    }
+
     public Character(String joueur, String warcraft, int level, int strenght, int agility, int intelligence) {
         this.name = joueur;
         this.warcraft = warcraft;
