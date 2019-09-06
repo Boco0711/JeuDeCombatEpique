@@ -195,6 +195,10 @@ public class Character {
 
     public void receiveDamage(int damage) {
         this.vitality = this.vitality - damage;
+        if (damage > 1) {
+            System.out.println(this.getName() + " perd " + damage + " points de vie");
+        } else if (damage == 1)
+            System.out.println(this.getName() + " perd " + damage + " point de vie");
     }
 
     public void addAgility(int i) {
