@@ -41,30 +41,39 @@ public class Character {
         characterApperance(joueur);
     }
 
+    public int askSomething(String question, String error, int min, int max) {
+        System.out.println(question);
+        boolean responseIsGood = false;
+        int choix = 0;
+        while (!responseIsGood || choix < min || choix > max) {
+            try {
+                choix = sc.nextInt();
+                responseIsGood = true;
+                if (choix < min || choix > max) {
+                    System.out.println(error);
+                    System.out.println(question);
+                }
+            } catch (InputMismatchException e) {
+                sc.next();
+                System.out.println(error);
+                System.out.println(question);
+                responseIsGood = false;
+            }
+        }
+        return choix;
+    }
+
     /**
      * Display a question to get the Warcraft of the character
      *
      * @return String warcraft
      */
     public String askWarcraft() {
-        System.out.println("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rodeur; 3 : Mage)");
-        boolean responseIsGood = false;
-        int choix = 0;
-        while (!responseIsGood || choix < 1 || choix > 3) {
-            try {
-                choix = sc.nextInt();
-                responseIsGood = true;
-                if (choix < 1 || choix > 3) {
-                    System.out.println("Vous n'avez pas choisi de classe parmi les choix proposés");
-                    System.out.println("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rodeur; 3 : Mage)");
-                }
-            } catch (InputMismatchException e) {
-                sc.next();
-                System.out.println("Vous n'avez pas choisi de classe parmi les choix proposés");
-                System.out.println("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rodeur; 3 : Mage)");
-                responseIsGood = false;
-            }
-        }
+        String question = "Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rodeur; 3 : Mage)";
+        String error = "Vous n'avez pas choisi de classe parmi les choix proposés";
+        int min = 1;
+        int max = 3;
+        int choix = askSomething(question, error, min, max);
         switch (choix) {
             case 1:
                 return "Guerrier";
@@ -82,23 +91,11 @@ public class Character {
      * @return Level of character
      */
     private int askLevel() {
-        System.out.println("Niveau du personnage ?");
-        int level = 0;
-        boolean responseIsGood = false;
-        while (!responseIsGood || level < 1 || level > 100) {
-            try {
-                level = sc.nextInt();
-                responseIsGood = true;
-                if (level < 1 || level > 100) {
-                    System.out.println("Le niveau doit être compris entre 1 et 100 inclus");
-                    level = sc.nextInt();
-                }
-            } catch (InputMismatchException e) {
-                sc.next();
-                System.out.println("Le niveau doit être compris entre 1 et 100 inclus");
-                System.out.println("Niveau du personnage ?");
-            }
-        }
+        String question = "Niveau du personnage ?";
+        String error = "Le niveau doit être compris entre 1 et 100";
+        int min = 0;
+        int max = 100;
+        int level = askSomething(question, error, min, max);
         return level;
     }
 
@@ -110,24 +107,10 @@ public class Character {
      * @return the Strenght of the character
      */
     private int askStrenght(int level) {
-        System.out.println("Force du personnage ?");
-        int strenght = -1;
-        boolean responseIsGood = false;
-        while (!responseIsGood || strenght < 0 || strenght > level) {
-            try {
-                strenght = sc.nextInt();
-                responseIsGood = true;
-                if (strenght < 0 || strenght > level) {
-                    System.out.println("La valeur de la Force doit être compris entre 0 et " + level);
-                    System.out.println("Force du personnage ? (0 - " + level + ")");
-                    strenght = sc.nextInt();
-                }
-            } catch (InputMismatchException e) {
-                sc.next();
-                System.out.println("La valeur de la Force doit être compris entre 0 et " + level);
-                System.out.println("Force du personnage ? (0 - " + level + ")");
-            }
-        }
+        String question = "Force du personnage ?";
+        String error = "La valeur de la Force doit être comprise entre 0 et " + level;
+        int min = 0;
+        int strenght = askSomething(question, error, min, level);
         return strenght;
     }
 
@@ -140,24 +123,11 @@ public class Character {
      * @return Agility of the character
      */
     private int askAgility(int level, int strenght) {
-        System.out.println("Agilité du personnage ?");
-        int agility = -1;
-        boolean responseIsGood = false;
-        while (!responseIsGood || agility < 0 || agility > (level - strenght)) {
-            try {
-                agility = sc.nextInt();
-                responseIsGood = true;
-                if (agility < 0 || agility > (level - strenght)) {
-                    System.out.println("La valeur de l'Agilité doit être comprise entre 0 et " + (level - strenght));
-                    System.out.println("Agilité du personnage ? (0 - " + (level - strenght) + ")");
-                    agility = sc.nextInt();
-                }
-            } catch (InputMismatchException e) {
-                sc.next();
-                System.out.println("La valeur de l'Agilité doit être comprise entre 0 et " + (level - strenght));
-                System.out.println("Agilité du personnage ? (0 - " + (level - strenght) + ")");
-            }
-        }
+        String question = "Agilité du personnage ?";
+        String error = "La valeur de l'Agilité doit être comprise entre 0 et " + (level - strenght);
+        int min = 0;
+        int max = level - strenght;
+        int agility = askSomething(question, error, min, max);
         return agility;
     }
 
@@ -171,24 +141,11 @@ public class Character {
      * @return intelligence of the character
      */
     private int askIntelligence(int level, int strenght, int agility) {
-        System.out.println("Intelligence du personnage ?");
-        int intelligence = -1;
-        boolean responseIsGood = false;
-        while (!responseIsGood || intelligence < 0 || intelligence > (level - (strenght + agility))) {
-            try {
-                intelligence = sc.nextInt();
-                responseIsGood = true;
-                if (agility < 0 || agility > (level - strenght)) {
-                    System.out.println("La valeur de l'Intelligence doit être comprise entre 0 et " + (level - (strenght + intelligence)));
-                    System.out.println("Intelligence du personnage ? (0 - " + (level - (strenght + intelligence)) + ")");
-                    level = sc.nextInt();
-                }
-            } catch (InputMismatchException e) {
-                sc.next();
-                System.out.println("La valeur de l'Intelligence doit être comprise entre 0 et " + (level - (strenght + intelligence)));
-                System.out.println("Intelligence du personnage ? (0 - " + (level - (strenght + intelligence)) + ")");
-            }
-        }
+        String question = "Intelligence du personnage ?";
+        String error = "La valeur de l'Intelligence doit être comprise entre 0 et " + (level - (strenght + agility));
+        int min = 0;
+        int max = level - (strenght + agility);
+        int intelligence = askSomething(question, error, min, max);
         return intelligence;
     }
 
