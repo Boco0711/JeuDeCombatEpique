@@ -100,10 +100,10 @@ public class CharacterTest {
         Character joueur = new Character(joueur1);
         String[] output = outContent.toString().replace("\r\n", "\n").split("\n");
         assertEquals("Vous n'avez pas choisi de classe parmi les choix proposés", output[2]);
-        assertEquals("Le niveau doit être compris entre 1 et 100 inclus", output[5]);
-        assertEquals("La valeur de la Force doit être compris entre 0 et 88", output[7]);
-        assertEquals("La valeur de l'Agilité doit être comprise entre 0 et 0", output[10]);
-        assertEquals("Woarg je suis le " + joueur.getWarcraft() + " " + joueur1 + " niveau " + joueur.getLevel() + " je possède " + joueur.getVitality() + " de vitalité, " + joueur.getStrenght() + " de force, " + joueur.getAgility() + " d'agilité et " + joueur.getIntelligence() + " d'intelligence !", output[13]);
+        assertEquals("Le niveau doit être compris entre 1 et 100", output[5]);
+        assertEquals("La valeur de la Force doit être comprise entre 0 et 88", output[8]);
+        assertEquals("La valeur de l'Agilité doit être comprise entre 0 et 0", output[11]);
+        assertEquals("Woarg je suis le " + joueur.getWarcraft() + " " + joueur1 + " niveau " + joueur.getLevel() + " je possède " + joueur.getVitality() + " de vitalité, " + joueur.getStrenght() + " de force, " + joueur.getAgility() + " d'agilité et " + joueur.getIntelligence() + " d'intelligence !", output[14]);
     }
 
     @Test
