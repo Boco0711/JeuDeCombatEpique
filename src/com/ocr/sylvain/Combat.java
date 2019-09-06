@@ -131,9 +131,7 @@ public class Combat {
     private void specialActionEffect(Character attacker, Character defender) {
         switch (attacker.getWarcraft()) {
             case "Guerrier":
-                System.out.println(attacker.getName() + " utilise " + getSpecialAttack(attacker.getWarcraft()) + " et inflige " + attacker.getStrenght() * 2 + " dommages");
-                defender.receiveDamage(attacker.getStrenght() * 2);
-                attacker.receiveDamage(attacker.getStrenght() / 2);
+                warriorSpecialActionUsed(attacker, defender);
                 break;
             case "Rodeur":
                 System.out.println(attacker.getName() + " utilise " + getSpecialAttack(attacker.getWarcraft()) + " et gagne " + attacker.getLevel() / 2 + " d'agilité");
@@ -144,10 +142,34 @@ public class Combat {
                     System.out.println(attacker.getName() + " utilise " + getSpecialAttack(attacker.getWarcraft()) + " et gagne " + attacker.getIntelligence() * 2 + " en vitalité");
                     attacker.addHealth(attacker.getIntelligence() * 2);
                 } else {
-                    System.out.println(attacker.getName() + " utilise " + getSpecialAttack(attacker.getWarcraft()) + " et gagne " + (attacker.getLevel()*5 - attacker .getVitality() ) + " en vitalité");
+                    System.out.println(attacker.getName() + " utilise " + getSpecialAttack(attacker.getWarcraft()) + " et gagne " + (attacker.getLevel() * 5 - attacker.getVitality()) + " en vitalité");
                     attacker.addHealth(attacker.getIntelligence() * 2);
                 }
                 break;
+        }
+    }
+
+    public void setJoueur1IsWinner(boolean joueur1IsWinner) {
+        this.joueur1IsWinner = joueur1IsWinner;
+    }
+
+    public boolean getJoueur1IsWinner() {
+        return this.joueur1IsWinner;
+    }
+
+    private void warriorSpecialActionUsed (Character attacker, Character defender) {
+        System.out.println(attacker.getName() + " utilise " + getSpecialAttack(attacker.getWarcraft()) + " et inflige " + attacker.getStrenght() * 2 + " dommages");
+        defender.receiveDamage(attacker.getStrenght() * 2);
+        if (defender.getVitality() == 0) {
+            if (defender.getName().equals("Joueur 2"))
+                setJoueur1IsWinner(true);
+            System.out.println(defender.getName() + " est mort");
+        }
+        attacker.receiveDamage(attacker.getStrenght() / 2);
+        if (attacker.getVitality() <= 0 && defender.getVitality() > 0) {
+            if (attacker.getName().equals("Joueur 2"))
+                setJoueur1IsWinner(true);
+            System.out.println(attacker.getName() + " est mort");
         }
     }
 }
