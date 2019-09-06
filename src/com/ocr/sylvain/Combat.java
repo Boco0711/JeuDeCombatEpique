@@ -18,7 +18,8 @@ public class Combat {
     }
 
     /**
-     *  Run fight of the 2 player
+     * Run fight of the 2 player
+     *
      * @param joueur1 one of the 2 player
      * @param joueur2 second of the 2 player
      */
@@ -26,7 +27,7 @@ public class Combat {
         while (joueur1.getVitality() > 0 && joueur2.getVitality() > 0) {
             fight(joueur1, joueur2);
             if (joueur1.getVitality() > 0 && joueur2.getVitality() > 0)
-            fight(joueur2, joueur1);
+                fight(joueur2, joueur1);
         }
         boolean player1Win = getJoueur1IsWinner();
         if (player1Win == false)
@@ -36,7 +37,8 @@ public class Combat {
     }
 
     /**
-     *  Ask a question about the fight in standart input, get response and call correct action
+     * Ask a question about the fight in standart input, get response and call correct action
+     *
      * @param attacker the player that attack
      * @param defender the player that will be attacked
      */
@@ -64,6 +66,7 @@ public class Combat {
 
     /**
      * Return the name of Basic attack depending on the player's warcraft
+     *
      * @param warcraft player's warcraft
      * @return the name of the basic attack
      */
@@ -81,6 +84,7 @@ public class Combat {
 
     /**
      * Return the name of Special attack depending on the player's warcraft
+     *
      * @param warcraft
      * @return the name of special attack
      */
@@ -98,6 +102,7 @@ public class Combat {
 
     /**
      * Display the effect of a basic attack depending on the attacker's warcraft
+     *
      * @param attacker player that used the basic attack
      * @param defender player that will be hit by the basic attack
      */
@@ -125,6 +130,7 @@ public class Combat {
 
     /**
      * Display the effect of a special attack depending on the attacker's warcraft
+     *
      * @param attacker player that used the special attack
      * @param defender player that may be hit by special attack depending on attacker's warcraft
      */
@@ -138,7 +144,7 @@ public class Combat {
                 attacker.addAgility(attacker.getLevel() / 2);
                 break;
             case "Mage":
-                if(attacker.getVitality() <= (attacker.getLevel()*5 - attacker.getIntelligence()*2)) {
+                if (attacker.getVitality() <= (attacker.getLevel() * 5 - attacker.getIntelligence() * 2)) {
                     System.out.println(attacker.getName() + " utilise " + getSpecialAttack(attacker.getWarcraft()) + " et gagne " + attacker.getIntelligence() * 2 + " en vitalité");
                     attacker.addHealth(attacker.getIntelligence() * 2);
                 } else {
@@ -157,7 +163,13 @@ public class Combat {
         return this.joueur1IsWinner;
     }
 
-    private void warriorSpecialActionUsed (Character attacker, Character defender) {
+    /**
+     * Display sentence of use and effect when a warrior use his special abilitie
+     *
+     * @param attacker the warrior who's using his special abilitie
+     * @param defender the character that suffer the attack
+     */
+    private void warriorSpecialActionUsed(Character attacker, Character defender) {
         System.out.println(attacker.getName() + " utilise " + getSpecialAttack(attacker.getWarcraft()) + " et inflige " + attacker.getStrenght() * 2 + " dommages");
         defender.receiveDamage(attacker.getStrenght() * 2);
         if (defender.getVitality() == 0) {
