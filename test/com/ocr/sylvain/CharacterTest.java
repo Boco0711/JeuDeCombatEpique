@@ -9,6 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CharacterTest {
     private String joueur1 = "Joueur 1";
@@ -25,6 +26,49 @@ public class CharacterTest {
         System.setOut(System.out);
     }
 
+    @Test
+    public void Given_Warrior_When_AskWarcraftIsRun_Then_ReturnWarrior() {
+        System.setIn(new ByteArrayInputStream("1\n".getBytes()));
+        Character joueur1 = new Character();
+        String comp = joueur1.askWarcraft();
+        assertTrue(comp.equals("Guerrier"));
+    }
+
+    @Test
+    public void Given_Rodeur_When_AskWarcraftIsRun_Then_ReturnRodeur() {
+        System.setIn(new ByteArrayInputStream("2\n".getBytes()));
+        Character joueur1 = new Character();
+        String comp = joueur1.askWarcraft();
+        assertTrue(comp.equals("Rodeur"));
+    }
+
+    @Test
+    public void Given_Mage_When_AskWarcraftIsRun_Then_ReturnMage() {
+        System.setIn(new ByteArrayInputStream("3\n".getBytes()));
+        Character joueur1 = new Character();
+        String comp = joueur1.askWarcraft();
+        assertTrue(comp.equals("Mage"));
+    }
+
+    @Test
+    public void Given_BadValue_When_AskWarcraftIsRun_Then_ReAsk() {
+        System.setIn(new ByteArrayInputStream("4\n1\n".getBytes()));
+        Character joueur1 = new Character();
+        String comp = joueur1.askWarcraft();
+        String[] output = outContent.toString().replace("\r\n", "\n").split("\n");
+        assertEquals("Vous n'avez pas choisi de classe parmi les choix proposés", output [1]);
+        assertEquals("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rodeur; 3 : Mage)", output[2]);
+    }
+
+    @Test
+    public void Given_Text_When_AskWarcraftIsRun_Then_ReAsk() {
+        System.setIn(new ByteArrayInputStream("tete\n1\n".getBytes()));
+        Character joueur1 = new Character();
+        String comp = joueur1.askWarcraft();
+        String[] output = outContent.toString().replace("\r\n", "\n").split("\n");
+        assertEquals("Vous n'avez pas choisi de classe parmi les choix proposés", output [1]);
+        assertEquals("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rodeur; 3 : Mage)", output[2]);
+    }
 
     @Test
     public void Given_GuerrierLevel88Strenght88Agility0Intelligence0InStandardInput_When_AskStatsIsRun_Then_DisplayGuerrierSentence() {
@@ -63,7 +107,7 @@ public class CharacterTest {
     }
 
     @Test
-    public void Given_TextResponses_When_AskingForWarcraft_Then_DisplayErrorSentence(){
+    public void Given_TextResponses_When_AskingForWarcraft_Then_DisplayErrorSentence() {
         System.setIn(new ByteArrayInputStream("texte\n1\n1\n1\n0\n0".getBytes()));
         Character joueur = new Character(joueur1);
         String[] output = outContent.toString().replace("\r\n", "\n").split("\n");
