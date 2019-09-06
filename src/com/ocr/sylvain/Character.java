@@ -41,6 +41,15 @@ public class Character {
         characterApperance(joueur);
     }
 
+    /**
+     * Display a question, look for the answer if it match the min and max, if not display error sentence and reask the question
+     *
+     * @param question the question to display
+     * @param error    the error sentence to display in case of bad answer
+     * @param min      min value for the answer
+     * @param max      max value for the answer
+     * @return the answer
+     */
     public int askSomething(String question, String error, int min, int max) {
         System.out.println(question);
         boolean responseIsGood = false;
