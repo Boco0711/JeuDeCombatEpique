@@ -38,6 +38,11 @@ public class Character {
         characterApperance(joueur);
     }
 
+    /**
+     * Display a question to get the Warcraft of the character
+     *
+     * @return String warcraft
+     */
     public String askWarcraft() {
         System.out.println("Veuillez choisir la classe de votre personnage (1 : Guerrier, 2 : Rodeur; 3 : Mage)");
         boolean responseIsGood = false;
@@ -68,6 +73,11 @@ public class Character {
         return null;
     }
 
+    /**
+     * Display a question to get the level of Character
+     *
+     * @return Level of character
+     */
     private int askLevel() {
         System.out.println("Niveau du personnage ?");
         int level = 0;
@@ -89,6 +99,13 @@ public class Character {
         return level;
     }
 
+    /**
+     * Display a question to get the strenght of the character depending on his level.
+     * Strenght cannot be higher then level
+     *
+     * @param level Level of the character
+     * @return the Strenght of the character
+     */
     private int askStrenght(int level) {
         System.out.println("Force du personnage ?");
         int strenght = -1;
@@ -111,6 +128,14 @@ public class Character {
         return strenght;
     }
 
+    /**
+     * Display a question to get the Agility stat of the character depending on his level and strenght.
+     * Agility cannot be higher then level - strenght
+     *
+     * @param level    Level of the character
+     * @param strenght Strenght of the character
+     * @return Agility of the character
+     */
     private int askAgility(int level, int strenght) {
         System.out.println("Agilité du personnage ?");
         int agility = -1;
@@ -120,19 +145,28 @@ public class Character {
                 agility = sc.nextInt();
                 responseIsGood = true;
                 if (agility < 0 || agility > (level - strenght)) {
-                    System.out.println("La valeur de l'Agilité doit être comprise entre 0 et " + (level-strenght));
-                    System.out.println("Agilité du personnage ? (0 - " + (level-strenght) + ")");
+                    System.out.println("La valeur de l'Agilité doit être comprise entre 0 et " + (level - strenght));
+                    System.out.println("Agilité du personnage ? (0 - " + (level - strenght) + ")");
                     agility = sc.nextInt();
                 }
             } catch (InputMismatchException e) {
                 sc.next();
-                System.out.println("La valeur de l'Agilité doit être comprise entre 0 et " + (level-strenght));
-                System.out.println("Agilité du personnage ? (0 - " + (level-strenght) + ")");
+                System.out.println("La valeur de l'Agilité doit être comprise entre 0 et " + (level - strenght));
+                System.out.println("Agilité du personnage ? (0 - " + (level - strenght) + ")");
             }
         }
         return agility;
     }
 
+    /**
+     * Display a question to get the Intelligence stat of the character depending on his level and strenght and agility.
+     * Intelligence cannot be higher then level - (strenght + agility)
+     *
+     * @param level    the level of the character
+     * @param strenght the strenght of the character
+     * @param agility  agility of the character
+     * @return intelligence of the character
+     */
     private int askIntelligence(int level, int strenght, int agility) {
         System.out.println("Intelligence du personnage ?");
         int intelligence = -1;
@@ -142,19 +176,25 @@ public class Character {
                 intelligence = sc.nextInt();
                 responseIsGood = true;
                 if (agility < 0 || agility > (level - strenght)) {
-                    System.out.println("La valeur de l'Intelligence doit être comprise entre 0 et " + (level-(strenght+intelligence)));
-                    System.out.println("Intelligence du personnage ? (0 - " + (level-(strenght+intelligence)) + ")");
+                    System.out.println("La valeur de l'Intelligence doit être comprise entre 0 et " + (level - (strenght + intelligence)));
+                    System.out.println("Intelligence du personnage ? (0 - " + (level - (strenght + intelligence)) + ")");
                     level = sc.nextInt();
                 }
             } catch (InputMismatchException e) {
                 sc.next();
-                System.out.println("La valeur de l'Intelligence doit être comprise entre 0 et " + (level-(strenght+intelligence)));
-                System.out.println("Intelligence du personnage ? (0 - " + (level-(strenght+intelligence)) + ")");
+                System.out.println("La valeur de l'Intelligence doit être comprise entre 0 et " + (level - (strenght + intelligence)));
+                System.out.println("Intelligence du personnage ? (0 - " + (level - (strenght + intelligence)) + ")");
             }
         }
         return intelligence;
     }
 
+    /**
+     * Display a sentence when a character is completed depending on his warcraft
+     * The sentence recap : Warcraft, name, level, vitality, strenght, agility, intelligence
+     *
+     * @param joueur the name of the character.
+     */
     private void characterApperance(String joueur) {
         if (this.warcraft.equals("Guerrier"))
             System.out.println("Woarg je suis le Guerrier " + joueur + " niveau " + this.level + " je possède " + this.vitality + " de vitalité, " + this.strenght + " de force, " + this.agility + " d'agilité et " + this.intelligence + " d'intelligence !");
@@ -192,7 +232,11 @@ public class Character {
         return intelligence;
     }
 
-
+    /**
+     * Display a text when damage are received
+     *
+     * @param damage the amout of damage received
+     */
     public void receiveDamage(int damage) {
         this.vitality = this.vitality - damage;
         if (damage > 1) {
@@ -201,10 +245,21 @@ public class Character {
             System.out.println(this.getName() + " perd " + damage + " point de vie");
     }
 
+    /**
+     * Add Agility to the current amount of agility
+     * <p>
+     * * @param i the amount of agility gained
+     */
     public void addAgility(int i) {
         this.agility = agility + i;
     }
 
+    /**
+     * Add Health to the current amount of health
+     * Health cannot be higher then level * 5
+     *
+     * @param i the amount of health gained
+     */
     public void addHealth(int i) {
         this.vitality = this.vitality + i;
         if (this.vitality > this.level * 5)
